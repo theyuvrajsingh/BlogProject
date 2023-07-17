@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categories</title>
+</head>
+<body>
+{% extends 'blog.html' %}
+{% block body %}
+{% block css %}
+
+{% endblock %}
+<style >
+  .card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.card{
+  transition: all 0.3s;
+}
+.card:hover{
+  transform: scale(1.10);
+}
+.card:hover {
+  background-color:rgb(247, 147, 147) ;
+}
+.like-btn {
+  background-color: #5b80db;
+  border: none;
+  color: #333;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.like-btn:hover {
+  background-color: #ccc;
+}
+
+.cat-title{ font-family: Arial, sans-serif;
+    font-size: 30px;
+    background-color: rgb(231, 162, 44);
+    border-radius: 5px;
+    color: #333;
+    
+    text-align: center;
+    padding: 19px 0;
+   /* Add a border to the element */
+   border: 1px solid #ccc;
+    
+    /* Add some margin to the bottom of the element */
+    margin-bottom: 20px;
+    
+    /* Add a box shadow to the element on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+  }
+  
+  /* Style the element on hover */
+  .cat-title:hover {
+    background-color: #d25a5a;
+    cursor: pointer;
+  }
+
+  .cat-title{
+    padding-top: 15px;
+  }
+</style>
+<br><br>
+  
+<div class="container-custom">
+  <h1 class="cat-title"><b>{{cat.title}}</b></h1>
+</div>
+
+<div class="container mt-5 mb-3">
+    <div class="row" >
+        {%for p in bpost %}
+        <!-- <h2 class = "cat-title"><b>{{p.title}}</b></a></h2><br><br><hr> -->
+
+        <div class="col-lg-4 my-5">
+          <div class="card" style="width: 22 rem;">
+                <img src="/media/{{p.image}}" class="card-img-top" alt="..." height="200px">
+                <div class="card-body" >
+                  <h5 class="card-title"  style="height: 6rem;" >{{p.title}} <br><small>By {{p.author}}</small></h5>
+                  <p class="card-text" style="height: 10rem;" >{{p.content| truncatechars:200}}</p> 
+                  <a href="/blog/{{p.slug}}" class="btn btn-primary pull-down">Read More {% if user.is_superuser %}<a href="delete_blog_post/{{post.slug}}/" class="btn btn-danger mx-4">Delete Blog</a>{% endif %}</a>
+                  <br>
+                  <br>
+                </div>
+              </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block js %} 
+<script></script>
+{% endblock %}
+
+</body>
+</html>
